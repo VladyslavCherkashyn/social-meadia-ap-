@@ -54,14 +54,14 @@ class User(AbstractUser):
             "The groups this user belongs to. A user will get all permissions "
             "granted to each of their groups."
         ),
-        related_name='blog_users'
+        related_name="blog_users",
     )
     user_permissions = models.ManyToManyField(
         Permission,
         verbose_name=_("user permissions"),
         blank=True,
         help_text=_("Specific permissions for this user."),
-        related_name='blog_users'
+        related_name="blog_users",
     )
 
     USERNAME_FIELD = "email"
@@ -72,18 +72,26 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to="profile_pictures/", null=True, blank=True)
+    profile_picture = models.ImageField(
+        upload_to="profile_pictures/", null=True, blank=True
+    )
     bio = models.TextField(max_length=255, null=True, blank=True)
 
 
 class Subscription(models.Model):
-    from_user = models.ForeignKey(User, related_name="following_subscriptions", on_delete=models.CASCADE)
-    to_user = models.ForeignKey(User, related_name="followers_subscriptions", on_delete=models.CASCADE)
+    from_user = models.ForeignKey(
+        User, related_name="following_subscriptions", on_delete=models.CASCADE
+    )
+    to_user = models.ForeignKey(
+        User, related_name="followers_subscriptions", on_delete=models.CASCADE
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["from_user", "to_user"], name="unique_subscription")
+            models.UniqueConstraint(
+                fields=["from_user", "to_user"], name="unique_subscription"
+            )
         ]
 
 
