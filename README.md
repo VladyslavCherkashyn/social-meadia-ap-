@@ -10,3 +10,22 @@
 </ul>
 
 
+# Setup and Installation
+
+<ol>
+<li>Clone the repository.
+  git clone https://https://github.com/VladyslavCherkashyn/social-meadia-ap-
+</li>
+<li>Change directory to the project folder.
+cd social-media-api</li>
+<li>Create a virtual environment and activate it.
+python -m venv venv source venv/bin/activate</li>
+<li>Install the required packages.
+pip install -r requirements.txt</li>
+<li>Apply database migrations.
+python manage.py migrate</li>
+<li>Run the development server.
+python manage.py runserver</li>
+</ol>
+
+
